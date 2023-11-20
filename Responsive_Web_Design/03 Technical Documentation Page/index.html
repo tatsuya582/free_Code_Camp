@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Git & GitHub: 自分用チートシート</title>
+</head>
+<body>
+  <div class='container'>
+    <nav id=navbar>
+      <header>コマンド一覧</header>
+      <a class='nav-link' href='#git_init'>git init</a>
+      <a class='nav-link' href='#git_add'>git add</a>
+      <a class='nav-link' href='#git_commit'>git commit</a>
+      <a class='nav-link' href='#git_push'>git push</a>
+      <a class='nav-link' href='#git_pull'>git pull</a>
+      <a class='nav-link' href='#git_status'>git status</a>
+      <a class='nav-link' href='#git_log'>git log</a>
+      <a class='nav-link' href='#git_branch'>git branch</a>
+      <a class='nav-link' href='#git_checkout'>git checkout</a>
+      <a class='nav-link' href='#git_merge'>git merge</a>
+    </nav>
+    <main id="main-doc">
+      <section class='main-section' id='git_init'>
+        <header><h2>git init</h2></header>
+        <p>新しいGitプロジェクトを始めるためのコマンドです。</p>
+        <p>このコマンドを実行すると、カレントディレクトリに.gitという名前のディレクトリが作成されます。</p>
+        <p>このディレクトリには、Gitリポジトリの設定と、リポジトリの変更履歴などのデータが保存されます。</p>
+        <p>具体的には、次のように使用されます:</p>
+        <code>git init</code>
+      </section>
+      <section class='main-section' id='git_add'>
+        <header><h2>git add</h2></header>
+        <p>変更したファイルをステージングエリアに追加します。</p>
+        <p>使い方は次の通りです：</p>
+        <code class='explanation radius1'># 単一のファイルをステージングする</code>
+        <code>git add [file_name]</code>
+        <code class='explanation'># 変更されたすべてのファイルをステージングする</code>
+        <code>git add .</code>
+        <code class='explanation'># 特定のディレクトリ内の変更をステージングする</code>
+        <code class='radius2'>git add [directory_name]</code>
+      </section>
+      <section class='main-section' id='git_commit'>
+        <header><h2>git commit</h2></header>
+        <p>ステージングエリアにある変更をローカルリポジトリにコミットするためのコマンドです。</p>
+        <p>基本的な使用方法は次のとおりです：</p>
+        <code>git commit -m "コミットメッセージ"</code>
+        <p>オプションについては、以下があります：</p>
+        <ul>
+          <li><span>-a:</span> 変更されたファイルをステージングせずに、変更を含む全てのトラック対象ファイルをコミットします。</li>
+          <li><span>-m:</span> コミットメッセージを直接コマンドラインから入力します。</li>
+          <li><span>-am:</span> -a オプションと -m オプションを一緒に使用して、ステージングとコミットを同時に行います。</li>
+        </ul>
+      </section>
+      <section class='main-section' id='git_push'>
+        <header><h2>git push</h2></header>
+        <p>ローカルのコミットをリモートリポジトリにアップロードするためのコマンドです。</p>
+        <p>基本的な使用方法は以下の通りです：</p>
+        <code>git push [リモート名] [ブランチ名]</code>
+        <p>このコマンドは、指定したブランチの変更をリモートに送信します。</p>
+        <p>[リモート名] は通常 origin が使われますが、プロジェクトによっては異なる場合があります。</p>
+        <p>[ブランチ名] は通常、現在のブランチ名です。</p>
+        <p>オプションについては、以下があります：</p>
+        <ul>
+          <li><span>-u:</span> 'git push -u origin main' のように使用します。これにより、次回の git push でブランチ名を指定しなくても済むように、トラッキング情報が設定されます。</li>
+          <li><span>--force (または -f):</span> 強制プッシュです。これを使用すると、リモートの履歴と合わない場合にも変更を強制的にプッシュできますが、注意が必要です。履歴が消去されたり、他の開発者の変更を上書きしてしまう可能性があります。</li>
+        </ul>
+      </section>
+      <section class='main-section' id='git_pull'>
+        <header><h2>git pull</h2></header>
+        <p>リモートリポジトリから最新の変更を取得し、現在のブランチにマージするためのコマンドです。</p>
+        <p>基本的な使用方法は次の通りです：</p>
+        <code>git pull [リモート名] [ブランチ名]</code>
+        <p>これは、指定したリモートリポジトリから指定したブランチの最新の変更を取得して、ローカルの対応するブランチにマージします。</p>
+        <p>例えば:</p>
+        <code>git pull origin main</code>
+        <p>これは、origin という名前のリモートリポジトリから main ブランチの最新の変更を取得し、ローカルの main ブランチにマージします。</p>
+        <p>オプションについては、以下があります：</p>
+        <ul>
+          <li><span>--rebase:</span> git pull --rebase origin main のように使用します。このオプションは、git pull を実行した後にローカルの変更をリモートの変更の後ろに追加します。これにより、クリーンで直感的な履歴が維持されることがあります。</li>
+          <li><span>--ff-only:</span> git pull --ff-only origin main のように使用します。これは、git pull を実行する際に、Fast-forwardマージだけを許可します。これにより、自動的にマージが行われ、コンフリクトを避けることができます。</li>
+        </ul>
+      </section>
+      <section class='main-section' id='git_status'>
+        <header><h2>git status</h2></header>
+        <p>現在の作業ディレクトリの状態を確認するためのコマンドです。</p>
+        <p>変更されたファイルやステージングエリアにあるファイル、およびコミットされていないファイルを表示します。</p>
+        <p>基本的な使用方法は次の通りです：</p>
+        <code>git status</code>
+        <p>オプションについては、以下があります：</p>
+        <ul>
+          <li><span>--short（または -s）:</span> git status -s のように使用します。短縮された状態で、ファイルの状態をより簡潔に表示します。変更されたファイル、ステージングエリアにあるファイル、および未追跡のファイルを一覧表示します。</li>
+          <li><span>--branch（または -b）:</span> git status -b のように使用します。現在のブランチ名や追跡ブランチなど、ブランチに関する詳細な情報も表示されます。</li>
+          <li><span>--untracked-files（または -u）:</span> git status -u のように使用します。このオプションを使用すると、未追跡のファイルも表示されます。</li>
+        </ul>
+      </section>
+      <section class='main-section' id='git_log'>
+        <header><h2>git log</h2></header>
+        <p>リポジトリのコミット履歴を表示するためのコマンドです。</p>
+        <p>このコマンドを使用すると、リポジトリの過去のコミットに関する情報を見ることができます。</p>
+        <p>基本的な使用方法は次の通りです：</p>
+        <code>git log</code>
+        <p>このコマンドは、コミット履歴を時系列順に表示します。コミットごとに、コミットID、著者、日付、コミットメッセージなどの情報が表示されます。</p>
+        <p>オプションについては、以下があります：</p>
+        <ul>
+          <li><span>--oneline:</span> git log --oneline と使用します。短い形式でコミットを表示します。各コミットを1行で表示し、コミットIDとコミットメッセージが表示されます。</li>
+          <li><span>-n [num]:</span> git log -n 5 のように使用します。表示するコミットの数を制限します。この場合は最新の5つのコミットのみ表示されます。</li>
+          <li><span>--graph:</span> git log --graph と使用します。コミットの履歴をグラフで表示します。マージやブランチの分岐など、コミット間の関係性を視覚的に表示します。</li>
+          <li><span>--since および --until:</span> git log --since="2 weeks ago" --until="1 week ago" のように使用します。指定した日付範囲内のコミットを表示します。</li>
+          <li><span>--author:</span> git log --author="author_name" のように使用します。特定の著者が行ったコミットのみを表示します。</li>
+        </ul>
+      </section>
+      <section class='main-section' id='git_branch'>
+        <header><h2>git branch</h2></header>
+        <p>ブランチに関する情報を表示・管理するためのコマンドです。</p>
+        <p>リポジトリ内のブランチの一覧を表示したり、新しいブランチを作成したり、現在のブランチを変更したりするのに使用されます。</p>
+        <p>基本的な使い方は次の通りです：</p>
+        <ul>
+          <li>ブランチ一覧を表示する: git branch</li>
+          <p>このコマンドは、ローカルリポジトリ内のすべてのブランチを一覧表示します。現在のブランチは、名前の前に * として表示されます。</p>
+          <li>新しいブランチを作成する: git branch [branch_name]</li>
+          <p>このコマンドは、現在のブランチから新しいブランチを作成しますが、まだ新しいブランチに切り替えたわけではありません。</p>
+        </ul>
+        <p>オプションについては、以下があります：</p>
+        <ul>
+          <li><span>-d :</span> git branch -d  と使用します。指定されたブランチを削除します。</li>
+          <li><span>-r :</span> git branch -r と使用します。リモートリポジトリのブランチを表示します。</li>
+          <li><span>-a :</span> git branch -a と使用します。ローカルとリモートのすべてのブランチを表示します。</li>
+          <li><span>-m :</span> git branch -m [new_branch_name] と使用します。現在のブランチの名前を変更します。</li>
+          <li><span>--merged :</span> git branch --merged と使用します。マージされたブランチの一覧を表示します。</li>
+          <li><span>--no-merged :</span> git branch --no-merged と使用します。まだマージされていないブランチの一覧を表示します。</li>
+        </ul>
+      </section>
+      <section class='main-section' id='git_checkout'>
+        <header><h2>git checkout</h2></header>
+        <p>ブランチの切り替えやファイルの復元に使用されます。</p>
+        <p>基本的な使い方は次の通りです：</p>
+        <ul>
+          <li>ブランチの切り替え: git checkout [branch_name]</li>
+          <p>このコマンドを使用すると、指定されたブランチに移動します。</p>
+          <li>特定のファイルの復元: git checkout [file_name]</li>
+          <p>これにより、最新のコミットの状態にそのファイルを復元します。</p>
+          <li>特定のコミットからファイルを取得: git checkout [commit_hash] [file_name]</li>
+          <p>これにより、指定したコミットからファイルを取得できます。</p>
+        </ul>
+        <p>オプションについては、以下があります：</p>
+        <ul>
+          <li><span>-b :</span> 既存のブランチから新しいブランチを作成して切り替えます。</li>
+          <li><span>-f :</span> 強制的に変更を行います。未コミットの変更は失われる可能性がありますので、注意が必要です。</li>
+          <li><span>-- :</span> ファイルを直前のコミット時点の状態に戻すためのコマンドです。</li>
+        </ul>
+      </section>
+      <section class='main-section' id='git_merge'>
+        <header><h2>git merge</h2></header>
+        <p>異なるブランチの変更を統合するために使用されます。</p>
+        <p>通常は、変更を取り込むための「対象ブランチ」を現在のブランチに統合します。</p>
+        <p>基本的な使用法は次のとおりです：</p>
+        <code>git merge [branch_name]</code>
+        <p>これにより、指定した [branch_name] の変更が現在のブランチにマージされます。</p>
+        <p>オプションについては、以下があります：</p>
+        <ul>
+          <li><span>--ff:</span> デフォルトの Fast-forward マージを強制します。</li>
+          <li><span>--no-ff:</span> Fast-forward　を禁止してマージを行います。このオプションを使用すると、マージコミットが作成され、履歴にマージが行われたことが明示されます。</li>
+          <li><span>--squash:</span> マージするコミットを1つにまとめます。複数のコミットを1つの大きなコミットにまとめたい場合に使用されます。</li>
+          <li><span>--abort:</span> マージの途中で何らかの問題が発生した場合、マージを取り消し、マージ前の状態に戻ります。</li>
+        </ul>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
